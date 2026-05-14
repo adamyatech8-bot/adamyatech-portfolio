@@ -6,7 +6,8 @@ import { Services } from './Components/Services'
 import { Work } from './Components/Work'
 import { About } from './Components/About'
 import { Toaster } from "sonner";
-import WhatsAppButton from "./components/WhatsAppButton";
+import Wbtn from './Components/Wbtn';
+
 
 import "./index.css";
 
@@ -15,7 +16,7 @@ const App = () => {
       <>
     <Toaster position="top-right" />  
     <div>
-      <WhatsAppButton />
+     <Wbtn />
       <Navbar />
       <Hero />
       <Services />
