@@ -5,7 +5,7 @@ import TempSeo from "./TempSeo";
 const projects = [
   {
     name: "Social Media Web App",
-    type: "Web App · 2025",
+    type: "Web App · 2026",
     desc: "Modern social platform with realtime messaging, posts, and smooth interactive UI.",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     color: "from-blue-500/30 via-cyan-500/20 to-transparent",
@@ -15,7 +15,7 @@ const projects = [
   },
   {
     name: "Rental Room Booking Platform",
-    type: "Mobile App · 2025",
+    type: "Mobile App · 2026",
     desc: "Smart booking experience for rooms, stays, and property management.",
     tags: ["React Native", "Expo", "Supabase"],
     color: "from-indigo-500/30 via-blue-500/20 to-transparent",
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     name: "Graphic Designer Portfolio",
-    type: "Marketing · 2024",
+    type: "Marketing · 2026",
     desc: "Creative portfolio experience with premium animations and immersive interactions.",
     tags: ["Astro", "Framer Motion", "GSAP"],
     color: "from-sky-500/30 via-blue-600/20 to-transparent",
@@ -35,7 +35,7 @@ const projects = [
   },
   {
     name: "GrowShop E-Commerce",
-    type: "E-commerce · 2024",
+    type: "E-commerce · 2026",
     desc: "Fast headless commerce experience with modern UX and personalized flows.",
     tags: ["Shopify", "Hydrogen", "Edge"],
     color: "from-cyan-500/30 via-indigo-500/20 to-transparent",

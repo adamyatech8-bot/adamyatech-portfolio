@@ -40,7 +40,7 @@ export function Contact() {
       // Mail to Admin
       await emailjs.send(
         "service_6m2qb1a",
-        "template_3gl21fo",
+        "template_eq2iwik",
         {
           from_name: form.name,
           from_email: form.email,
@@ -52,7 +52,7 @@ export function Contact() {
       // Auto Reply to User
       await emailjs.send(
         "service_6m2qb1a",
-        "template_3kcr6ev",
+        "template_eq2iwik",
         {
           from_name: form.name,
           from_email: form.email,
