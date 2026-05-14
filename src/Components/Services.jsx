@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2, Smartphone, Palette, Zap } from "lucide-react";
-import Seo from "./Seo";
+import TempSeo from "./TempSeo";
 
 const services = [
   {
@@ -36,7 +36,7 @@ const services = [
 export function Services() {
   return (
     <>
-      <Seo
+      <TempSeo
         title="Services | AdamyaTech"
         description="Explore website development, mobile app development, frontend engineering, UI/UX design, and scalable digital services by AdamyaTech."
       />

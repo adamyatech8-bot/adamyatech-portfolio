@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Rocket } from "lucide-react";
-import Seo from "./Seo";
+import TempSeo from "./TempSeo";
 
 const projects = [
   {
@@ -48,7 +48,7 @@ const projects = [
 export function Work() {
   return (
     <>
-      <Seo
+      <TempSeo
         title="Projects | AdamyaTech"
         description="View previous web development, app development, UI/UX, and modern digital projects created by AdamyaTech."
       />
