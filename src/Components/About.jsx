@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import SEO from "@/components/SEO";
+import Seo from "./Seo";
 
 const stats = [
   { num: "4", label: "Projects working" },
@@ -24,7 +24,7 @@ const stack = [
 export function About() {
   return (
     <>
-      <SEO
+      <Seo
         title="About | AdamyaTech"
         description="Learn about AdamyaTech, a modern tech portfolio focused on scalable applications, premium UI/UX, and performance-driven development."
       />

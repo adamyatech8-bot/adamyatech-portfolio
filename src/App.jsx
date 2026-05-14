@@ -7,6 +7,7 @@ import { Work } from './Components/Work'
 import { About } from './Components/About'
 import { Toaster } from "sonner";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 import "./index.css";
 

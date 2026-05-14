@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
 
-export default function SEO({
+export default function Seo({
   title = "AdamyaTech - Web & App Development",
   description = "AdamyaTech creates modern websites, high-performance web apps, mobile apps, and tech solutions with premium UI/UX and optimized performance.",
   keywords = "web development, app development, portfolio, UI UX, React developer, modern websites, frontend developer, AdamyaTech",
   image = "/preview.png",
-  url = "https://adamyatech.com",
+  url = "https://adamyatech.in",
 }) {
   return (
     <Helmet>
