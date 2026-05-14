@@ -36,10 +36,7 @@ export default function TempSeo({
 
       {/* Security */}
       <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-      <meta
-        httpEquiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self' data: https:;"
-      />
+      
 
       {/* Performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
