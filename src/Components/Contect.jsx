@@ -52,7 +52,7 @@ export function Contact() {
       // Auto Reply to User
       await emailjs.send(
         "service_6m2qb1a",
-        "template_eq2iwik",
+        "template_3kcr6ev",
         {
           from_name: form.name,
           from_email: form.email,
