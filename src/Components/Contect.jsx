@@ -258,7 +258,7 @@ export function Contact() {
   </a>
 
   <a
-    href="https://linkedin.com/in/yourusername"
+    href="https://www.linkedin.com/in/adamya-tech-091b55409"
     target="_blank"
     rel="noopener noreferrer"
     className="text-gray-400 hover:text-blue-400 transition"
