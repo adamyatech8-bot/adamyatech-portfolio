@@ -209,7 +209,7 @@ export function Contact() {
           href="#home"
           className="hover:text-cyan-400 transition"
         >
-          Home
+         <u>Home</u>
         </a>
 
         <a
