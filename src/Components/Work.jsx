@@ -1,176 +1,520 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, Rocket } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import {
+  ArrowUpRight,
+  Rocket,
+  Monitor,
+  Smartphone,
+  Palette,
+  ShoppingCart,
+} from "lucide-react";
+
 import TempSeo from "./TempSeo";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    number: "01",
+    icon: Monitor,
     name: "Social Media Web App",
-    type: "Web App · 2026",
-    desc: "Modern social platform with realtime messaging, posts, and smooth interactive UI.",
+    type: "WEB APP • 2026",
+    desc: "Realtime social platform with messaging, posts, profiles and modern interactions.",
     tags: ["Next.js", "TypeScript", "Tailwind"],
-    color: "from-blue-500/30 via-cyan-500/20 to-transparent",
-    accent: "oklch(0.74 0.19 240)",
+    accent: "from-cyan-500/20 to-blue-500/5",
     demo: "#",
-    comingSoon: true,
   },
+
   {
-    name: "Rental Room Booking Platform",
-    type: "Mobile App · 2026",
-    desc: "Smart booking experience for rooms, stays, and property management.",
+    number: "02",
+    icon: Smartphone,
+    name: "Rental Room Platform",
+    type: "MOBILE APP • 2026",
+    desc: "Smart booking experience for rooms, stays and property management.",
     tags: ["React Native", "Expo", "Supabase"],
-    color: "from-indigo-500/30 via-blue-500/20 to-transparent",
-    accent: "oklch(0.65 0.22 270)",
+    accent: "from-violet-500/20 to-fuchsia-500/5",
     demo: "#",
-    comingSoon: true,
   },
+
   {
-    name: "Graphic Designer Portfolio",
-    type: "Marketing · 2026",
-    desc: "Creative portfolio experience with premium animations and immersive interactions.",
-    tags: ["Astro", "Framer Motion", "GSAP"],
-    color: "from-sky-500/30 via-blue-600/20 to-transparent",
-    accent: "oklch(0.7 0.18 230)",
+    number: "03",
+    icon: Palette,
+    name: "Designer Portfolio",
+    type: "MARKETING • 2026",
+    desc: "Creative immersive portfolio with smooth animations and storytelling.",
+    tags: ["Astro", "GSAP", "Framer Motion"],
+    accent: "from-sky-500/20 to-cyan-500/5",
     demo: "#",
-    comingSoon: true,
   },
+
   {
-    name: "GrowShop E-Commerce",
-    type: "E-commerce · 2026",
-    desc: "Fast headless commerce experience with modern UX and personalized flows.",
+    number: "04",
+    icon: ShoppingCart,
+    name: "GrowShop Commerce",
+    type: "E-COMMERCE • 2026",
+    desc: "Fast headless commerce experience focused on conversions and speed.",
     tags: ["Shopify", "Hydrogen", "Edge"],
-    color: "from-cyan-500/30 via-indigo-500/20 to-transparent",
-    accent: "oklch(0.75 0.16 210)",
+    accent: "from-pink-500/20 to-violet-500/5",
     demo: "#",
-    comingSoon: true,
   },
 ];
 
 export function Work() {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".project-item", {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power2.out",
+        force3D: true,
+
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      // LIGHT FLOATING NODE
+      if (window.innerWidth >= 1024) {
+        gsap.to(".floating-node", {
+          y: -10,
+          repeat: -1,
+          yoyo: true,
+          duration: 2,
+          ease: "sine.inOut",
+        });
+      }
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <>
       <TempSeo
         title="Projects | AdamyaTech"
-        description="View previous web development, app development, UI/UX, and modern digital projects created by AdamyaTech."
+        description="Premium modern digital experiences crafted by AdamyaTech."
       />
 
-      <section id="work" className="py-32 relative">
-        <div className="container mx-auto px-6">
+      <section
+        id="work"
+        ref={sectionRef}
+        className="
+        relative
+        overflow-hidden
+        py-24 md:py-36
+        "
+      >
+        {/* BACKGROUND */}
+        <div className="absolute inset-0 bg-[#020617]" />
 
-          {/* Heading */}
-          <div className="flex items-end justify-between flex-wrap gap-6 mb-20">
-            <div>
-              <p className="text-primary font-mono text-sm mb-4">
+        {/* TOP LIGHT */}
+        <div
+          className="
+          absolute
+          top-0
+          left-1/2
+          -translate-x-1/2
+
+          w-[380px]
+          h-[380px]
+
+          bg-cyan-500/10
+          blur-[90px]
+
+          pointer-events-none
+          "
+        />
+
+        <div className="max-w-[1320px] mx-auto px-5 md:px-8">
+          {/* HEADING */}
+          <div
+            className="
+            flex
+            flex-col
+            lg:flex-row
+            lg:items-end
+            lg:justify-between
+
+            gap-10
+
+            mb-20 md:mb-28
+            "
+          >
+            <div className="max-w-3xl">
+              <p className="text-cyan-400 font-mono text-sm mb-5">
                 // selected work
               </p>
 
-              <h2 className="text-5xl md:text-7xl font-bold max-w-3xl text-balance">
-                Recent{" "}
+              <h2
+                className="
+                text-4xl
+                sm:text-5xl
+                md:text-7xl
+
+                font-bold
+                leading-[1]
+                "
+              >
+                Featured{" "}
+
                 <span
-                  className="text-gradient italic font-light"
-                  style={{ fontFamily: '"Instrument Serif", serif' }}
+                  className="
+                  italic
+                  font-light
+
+                  text-transparent
+                  bg-clip-text
+                  bg-gradient-to-r
+                  from-cyan-400
+                  via-violet-500
+                  to-pink-500
+                  "
+                  style={{
+                    fontFamily: '"Instrument Serif", serif',
+                  }}
                 >
                   projects
                 </span>
               </h2>
             </div>
 
-            <p className="text-muted-foreground max-w-sm leading-relaxed">
-              Premium digital products crafted with modern technologies,
-              performance, and beautiful user experiences.
+            <p
+              className="
+              max-w-md
+
+              text-muted-foreground
+              leading-relaxed
+              "
+            >
+              Carefully designed digital experiences blending
+              performance, interaction and modern aesthetics.
             </p>
           </div>
 
-          {/* Cards */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((p, i) => (
-              <motion.div
-                key={p.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border-gradient hover:-translate-y-2 transition-all duration-500"
-              >
-                {/* Top */}
-                <div
-                  className={`aspect-[16/10] bg-gradient-to-br ${p.color} relative overflow-hidden`}
-                >
-                  <div className="absolute inset-0 grid-bg opacity-40" />
+          {/* TIMELINE */}
+          <div className="relative">
+            {/* CENTER LINE */}
+            <div
+              className="
+              hidden lg:block
 
+              absolute
+              left-1/2
+              top-0
+              bottom-0
+
+              w-px
+
+              bg-gradient-to-b
+              from-cyan-400/40
+              via-violet-500/40
+              to-pink-500/40
+              "
+            />
+
+            {/* CARDS */}
+            <div className="flex flex-col gap-16 md:gap-20">
+              {projects.map((p, i) => (
+                <div
+                  key={p.name}
+                  className={`
+                  project-item
+
+                  relative
+
+                  flex
+                  justify-center
+
+                  ${
+                    i % 2 === 0
+                      ? "lg:justify-start"
+                      : "lg:justify-end"
+                  }
+                  `}
+                >
+                  {/* FLOATING NODE */}
                   <div
-                    className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full blur-3xl opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700"
-                    style={{ background: p.accent }}
+                    className="
+                    floating-node
+
+                    hidden lg:block
+
+                    absolute
+                    left-1/2
+                    top-1/2
+
+                    -translate-x-1/2
+                    -translate-y-1/2
+
+                    w-5
+                    h-5
+
+                    rounded-full
+
+                    bg-cyan-400
+
+                    shadow-[0_0_20px_#22d3ee]
+
+                    z-20
+                    "
                   />
 
-                  {/* Type */}
-                  <div className="absolute top-6 left-6">
-                    <span className="text-xs font-mono uppercase tracking-wider text-foreground/80 px-3 py-1.5 rounded-full glass-strong">
-                      {p.type}
-                    </span>
-                  </div>
+                  {/* CARD */}
+                  <div
+                    className="
+                    relative
 
-                  {/* Coming Soon Badge */}
-                  {p.comingSoon && (
-                    <div className="absolute top-6 right-6">
-                      <span className="flex items-center gap-2 text-xs font-medium bg-primary text-primary-foreground px-4 py-2 rounded-full shadow-glow">
-                        <Rocket size={14} />
-                        Coming Soon
-                      </span>
-                    </div>
-                  )}
+                    w-full
+                    lg:w-[46%]
 
-                  {/* Watermark */}
-                  <div className="absolute bottom-6 left-6 right-24 font-display font-bold text-4xl md:text-5xl text-foreground/15 group-hover:text-foreground/30 transition-colors leading-none">
-                    {p.name}
-                  </div>
-                </div>
+                    rounded-[28px]
 
-                {/* Bottom */}
-                <div className="p-8">
-                  <h3 className="text-2xl md:text-3xl font-semibold mb-3 group-hover:text-primary transition-colors">
-                    {p.name}
-                  </h3>
+                    overflow-hidden
 
-                  <p className="text-muted-foreground mb-5 leading-relaxed">
-                    {p.desc}
-                  </p>
+                    border border-white/10
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {p.tags.map((t) => (
-                      <span
-                        key={t}
-                        className="text-xs font-mono px-2.5 py-1 rounded-md bg-secondary/60 text-muted-foreground"
+                    bg-white/[0.03]
+
+                    backdrop-blur-md
+
+                    group
+
+                    transition-all
+                    duration-300
+
+                    hover:border-cyan-400/30
+                    hover:-translate-y-1
+                    "
+                  >
+                    {/* TOP VISUAL */}
+                    <div
+                      className={`
+                      relative
+
+                      h-[180px]
+                      md:h-[220px]
+
+                      overflow-hidden
+
+                      bg-gradient-to-br ${p.accent}
+                      `}
+                    >
+                      {/* GRID */}
+                      <div className="absolute inset-0 grid-bg opacity-20" />
+
+                      {/* GLOW */}
+                      <div
+                        className="
+                        absolute
+                        -right-16
+                        -bottom-16
+
+                        w-40
+                        h-40
+
+                        rounded-full
+
+                        bg-white/10
+
+                        blur-3xl
+                        "
+                      />
+
+                      {/* NUMBER */}
+                      <div
+                        className="
+                        absolute
+                        top-5
+                        left-5
+
+                        text-5xl
+                        md:text-6xl
+
+                        font-bold
+
+                        text-white/10
+                        "
                       >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                        {p.number}
+                      </div>
 
-                  {/* Buttons */}
-                  <div className="flex items-center gap-4">
-                    {/* Live Demo */}
-                    <a
-                      href={p.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-xl font-medium hover:scale-105 transition-all duration-300 shadow-glow"
-                    >
-                      Live Demo
-                      <ArrowUpRight size={18} />
-                    </a>
+                      {/* ICON */}
+                      <div
+                        className="
+                        absolute
+                        bottom-5
+                        left-5
 
-                    {/* Contact */}
-                    <a
-                      href="#contact"
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      Start a Project →
-                    </a>
+                        w-14
+                        h-14
+
+                        rounded-2xl
+
+                        border border-white/10
+
+                        bg-white/5
+
+                        backdrop-blur-sm
+
+                        flex items-center justify-center
+                        "
+                      >
+                        <p.icon size={28} className="text-cyan-300" />
+                      </div>
+
+                      {/* TYPE */}
+                      <div className="absolute top-5 right-5">
+                        <span
+                          className="
+                          text-[10px]
+                          tracking-[0.18em]
+
+                          px-3 py-1.5
+                          rounded-full
+
+                          border border-white/10
+
+                          bg-black/20
+                          backdrop-blur-sm
+                          "
+                        >
+                          {p.type}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* CONTENT */}
+                    <div className="p-6 md:p-8">
+                      {/* COMING SOON */}
+                      <div className="mb-5">
+                        <span
+                          className="
+                          inline-flex
+                          items-center
+                          gap-2
+
+                          text-xs
+
+                          px-3 py-1.5
+                          rounded-full
+
+                          bg-cyan-400
+                          text-black
+                          "
+                        >
+                          <Rocket size={12} />
+                          Coming Soon
+                        </span>
+                      </div>
+
+                      {/* TITLE */}
+                      <h3
+                        className="
+                        text-2xl
+                        md:text-3xl
+
+                        font-bold
+
+                        mb-4
+                        "
+                      >
+                        {p.name}
+                      </h3>
+
+                      {/* DESC */}
+                      <p
+                        className="
+                        text-sm
+                        md:text-base
+
+                        text-muted-foreground
+                        leading-relaxed
+
+                        mb-6
+                        "
+                      >
+                        {p.desc}
+                      </p>
+
+                      {/* TAGS */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {p.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="
+                            px-3 py-1
+
+                            rounded-full
+
+                            bg-white/8
+
+                            text-xs
+                            "
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* BUTTON */}
+                      <a
+                        href={p.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                        inline-flex
+                        items-center
+                        gap-2
+
+                        text-cyan-400
+
+                        hover:gap-4
+
+                        transition-all
+                        duration-300
+                        "
+                      >
+                        View Project
+
+                        <ArrowUpRight size={18} />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
+
+            {/* MOBILE LINE */}
+            <div
+              className="
+              absolute
+              left-1/2
+              top-0
+              -translate-x-1/2
+
+              w-px
+              h-full
+
+              bg-gradient-to-b
+              from-cyan-400/20
+              via-violet-500/20
+              to-pink-500/20
+
+              lg:hidden
+              "
+            />
           </div>
         </div>
       </section>
