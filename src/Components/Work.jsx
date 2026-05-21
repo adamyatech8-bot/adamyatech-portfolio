@@ -76,7 +76,6 @@ export function Work() {
         duration: 0.8,
         stagger: 0.12,
         ease: "power2.out",
-        force3D: true,
 
         scrollTrigger: {
           trigger: section,
@@ -85,7 +84,7 @@ export function Work() {
         },
       });
 
-      // LIGHT FLOATING NODE
+      // FLOATING NODE
       if (window.innerWidth >= 1024) {
         gsap.to(".floating-node", {
           y: -10,
@@ -97,7 +96,9 @@ export function Work() {
       }
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -110,11 +111,7 @@ export function Work() {
       <section
         id="work"
         ref={sectionRef}
-        className="
-        relative
-        overflow-hidden
-        py-24 md:py-36
-        "
+        className="relative overflow-hidden py-24 md:py-36"
       >
         {/* BACKGROUND */}
         <div className="absolute inset-0 bg-[#020617]" />
@@ -193,7 +190,6 @@ export function Work() {
             <p
               className="
               max-w-md
-
               text-muted-foreground
               leading-relaxed
               "
@@ -226,274 +222,281 @@ export function Work() {
 
             {/* CARDS */}
             <div className="flex flex-col gap-16 md:gap-20">
-              {projects.map((p, i) => (
-                <div
-                  key={p.name}
-                  className={`
-                  project-item
+              {projects.map((project, i) => {
+                const Icon = project.icon;
 
-                  relative
-
-                  flex
-                  justify-center
-
-                  ${
-                    i % 2 === 0
-                      ? "lg:justify-start"
-                      : "lg:justify-end"
-                  }
-                  `}
-                >
-                  {/* FLOATING NODE */}
+                return (
                   <div
-                    className="
-                    floating-node
+                    key={project.name}
+                    className={`
+                    project-item
 
-                    hidden lg:block
-
-                    absolute
-                    left-1/2
-                    top-1/2
-
-                    -translate-x-1/2
-                    -translate-y-1/2
-
-                    w-5
-                    h-5
-
-                    rounded-full
-
-                    bg-cyan-400
-
-                    shadow-[0_0_20px_#22d3ee]
-
-                    z-20
-                    "
-                  />
-
-                  {/* CARD */}
-                  <div
-                    className="
                     relative
 
-                    w-full
-                    lg:w-[46%]
+                    flex
+                    justify-center
 
-                    rounded-[28px]
-
-                    overflow-hidden
-
-                    border border-white/10
-
-                    bg-white/[0.03]
-
-                    backdrop-blur-md
-
-                    group
-
-                    transition-all
-                    duration-300
-
-                    hover:border-cyan-400/30
-                    hover:-translate-y-1
-                    "
+                    ${
+                      i % 2 === 0
+                        ? "lg:justify-start"
+                        : "lg:justify-end"
+                    }
+                    `}
                   >
-                    {/* TOP VISUAL */}
+                    {/* FLOATING NODE */}
                     <div
-                      className={`
+                      className="
+                      floating-node
+
+                      hidden lg:block
+
+                      absolute
+                      left-1/2
+                      top-1/2
+
+                      -translate-x-1/2
+                      -translate-y-1/2
+
+                      w-5
+                      h-5
+
+                      rounded-full
+
+                      bg-cyan-400
+
+                      shadow-[0_0_20px_#22d3ee]
+
+                      z-20
+                      "
+                    />
+
+                    {/* CARD */}
+                    <div
+                      className="
                       relative
 
-                      h-[180px]
-                      md:h-[220px]
+                      w-full
+                      lg:w-[46%]
+
+                      rounded-[28px]
 
                       overflow-hidden
 
-                      bg-gradient-to-br ${p.accent}
-                      `}
+                      border border-white/10
+
+                      bg-white/[0.03]
+
+                      backdrop-blur-md
+
+                      group
+
+                      transition-all
+                      duration-300
+
+                      hover:border-cyan-400/30
+                      hover:-translate-y-1
+                      "
                     >
-                      {/* GRID */}
-                      <div className="absolute inset-0 grid-bg opacity-20" />
-
-                      {/* GLOW */}
+                      {/* TOP VISUAL */}
                       <div
-                        className="
-                        absolute
-                        -right-16
-                        -bottom-16
+                        className={`
+                        relative
 
-                        w-40
-                        h-40
+                        h-[180px]
+                        md:h-[220px]
 
-                        rounded-full
+                        overflow-hidden
 
-                        bg-white/10
-
-                        blur-3xl
-                        "
-                      />
-
-                      {/* NUMBER */}
-                      <div
-                        className="
-                        absolute
-                        top-5
-                        left-5
-
-                        text-5xl
-                        md:text-6xl
-
-                        font-bold
-
-                        text-white/10
-                        "
+                        bg-gradient-to-br ${project.accent}
+                        `}
                       >
-                        {p.number}
-                      </div>
+                        {/* GRID */}
+                        <div className="absolute inset-0 grid-bg opacity-20" />
 
-                      {/* ICON */}
-                      <div
-                        className="
-                        absolute
-                        bottom-5
-                        left-5
-
-                        w-14
-                        h-14
-
-                        rounded-2xl
-
-                        border border-white/10
-
-                        bg-white/5
-
-                        backdrop-blur-sm
-
-                        flex items-center justify-center
-                        "
-                      >
-                        <p.icon size={28} className="text-cyan-300" />
-                      </div>
-
-                      {/* TYPE */}
-                      <div className="absolute top-5 right-5">
-                        <span
+                        {/* GLOW */}
+                        <div
                           className="
-                          text-[10px]
-                          tracking-[0.18em]
+                          absolute
+                          -right-16
+                          -bottom-16
 
-                          px-3 py-1.5
+                          w-40
+                          h-40
+
                           rounded-full
+
+                          bg-white/10
+
+                          blur-3xl
+                          "
+                        />
+
+                        {/* NUMBER */}
+                        <div
+                          className="
+                          absolute
+                          top-5
+                          left-5
+
+                          text-5xl
+                          md:text-6xl
+
+                          font-bold
+
+                          text-white/10
+                          "
+                        >
+                          {project.number}
+                        </div>
+
+                        {/* ICON */}
+                        <div
+                          className="
+                          absolute
+                          bottom-5
+                          left-5
+
+                          w-14
+                          h-14
+
+                          rounded-2xl
 
                           border border-white/10
 
-                          bg-black/20
+                          bg-white/5
+
                           backdrop-blur-sm
+
+                          flex items-center justify-center
                           "
                         >
-                          {p.type}
-                        </span>
-                      </div>
-                    </div>
+                          <Icon
+                            size={28}
+                            className="text-cyan-300"
+                          />
+                        </div>
 
-                    {/* CONTENT */}
-                    <div className="p-6 md:p-8">
-                      {/* COMING SOON */}
-                      <div className="mb-5">
-                        <span
+                        {/* TYPE */}
+                        <div className="absolute top-5 right-5">
+                          <span
+                            className="
+                            text-[10px]
+                            tracking-[0.18em]
+
+                            px-3 py-1.5
+                            rounded-full
+
+                            border border-white/10
+
+                            bg-black/20
+                            backdrop-blur-sm
+                            "
+                          >
+                            {project.type}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* CONTENT */}
+                      <div className="p-6 md:p-8">
+                        {/* COMING SOON */}
+                        <div className="mb-5">
+                          <span
+                            className="
+                            inline-flex
+                            items-center
+                            gap-2
+
+                            text-xs
+
+                            px-3 py-1.5
+                            rounded-full
+
+                            bg-cyan-400
+                            text-black
+                            "
+                          >
+                            <Rocket size={12} />
+                            Coming Soon
+                          </span>
+                        </div>
+
+                        {/* TITLE */}
+                        <h3
+                          className="
+                          text-2xl
+                          md:text-3xl
+
+                          font-bold
+
+                          mb-4
+                          "
+                        >
+                          {project.name}
+                        </h3>
+
+                        {/* DESC */}
+                        <p
+                          className="
+                          text-sm
+                          md:text-base
+
+                          text-muted-foreground
+                          leading-relaxed
+
+                          mb-6
+                          "
+                        >
+                          {project.desc}
+                        </p>
+
+                        {/* TAGS */}
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="
+                              px-3 py-1
+
+                              rounded-full
+
+                              bg-white/8
+
+                              text-xs
+                              "
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* BUTTON */}
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="
                           inline-flex
                           items-center
                           gap-2
 
-                          text-xs
+                          text-cyan-400
 
-                          px-3 py-1.5
-                          rounded-full
+                          hover:gap-4
 
-                          bg-cyan-400
-                          text-black
+                          transition-all
+                          duration-300
                           "
                         >
-                          <Rocket size={12} />
-                          Coming Soon
-                        </span>
+                          View Project
+
+                          <ArrowUpRight size={18} />
+                        </a>
                       </div>
-
-                      {/* TITLE */}
-                      <h3
-                        className="
-                        text-2xl
-                        md:text-3xl
-
-                        font-bold
-
-                        mb-4
-                        "
-                      >
-                        {p.name}
-                      </h3>
-
-                      {/* DESC */}
-                      <p
-                        className="
-                        text-sm
-                        md:text-base
-
-                        text-muted-foreground
-                        leading-relaxed
-
-                        mb-6
-                        "
-                      >
-                        {p.desc}
-                      </p>
-
-                      {/* TAGS */}
-                      <div className="flex flex-wrap gap-2 mb-8">
-                        {p.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="
-                            px-3 py-1
-
-                            rounded-full
-
-                            bg-white/8
-
-                            text-xs
-                            "
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* BUTTON */}
-                      <a
-                        href={p.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="
-                        inline-flex
-                        items-center
-                        gap-2
-
-                        text-cyan-400
-
-                        hover:gap-4
-
-                        transition-all
-                        duration-300
-                        "
-                      >
-                        View Project
-
-                        <ArrowUpRight size={18} />
-                      </a>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* MOBILE LINE */}

@@ -24,6 +24,7 @@ const services = [
     desc: "Modern websites built with React, Next.js and TypeScript.",
     skills: ["React", "Next.js", "TypeScript"],
   },
+
   {
     icon: Smartphone,
     num: "02",
@@ -31,6 +32,7 @@ const services = [
     desc: "Cross-platform mobile apps with smooth native feel.",
     skills: ["React Native", "Expo", "Android"],
   },
+
   {
     icon: Palette,
     num: "03",
@@ -38,6 +40,7 @@ const services = [
     desc: "Beautiful interfaces focused on user experience.",
     skills: ["Figma", "Framer", "Motion"],
   },
+
   {
     icon: Zap,
     num: "04",
@@ -45,6 +48,7 @@ const services = [
     desc: "Ultra-fast optimized websites with strong SEO.",
     skills: ["SEO", "Lighthouse", "Speed"],
   },
+
   {
     icon: Rocket,
     num: "05",
@@ -52,6 +56,7 @@ const services = [
     desc: "Production-ready cloud deployment & scaling.",
     skills: ["Vercel", "CI/CD", "Cloud"],
   },
+
   {
     icon: ShieldCheck,
     num: "06",
@@ -65,24 +70,20 @@ export function Services() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const isDesktop = window.innerWidth >= 1024;
-
     const section = sectionRef.current;
 
     if (!section) return;
 
-    const ctx = gsap.context(() => {
-      // =========================
-      // CARDS REVEAL
-      // =========================
+    const isDesktop = window.innerWidth >= 1024;
 
+    const ctx = gsap.context(() => {
+      // CARD REVEAL
       gsap.from(".service-card", {
         opacity: 0,
         y: 60,
         duration: 0.8,
         stagger: 0.12,
         ease: "power2.out",
-        force3D: true,
 
         scrollTrigger: {
           trigger: section,
@@ -91,10 +92,7 @@ export function Services() {
         },
       });
 
-      // =========================
-      // DESKTOP ONLY PATH
-      // =========================
-
+      // DESKTOP PATH ANIMATION
       if (!isDesktop) return;
 
       const path = document.querySelector("#journeyPath");
@@ -104,32 +102,25 @@ export function Services() {
 
       const pathLength = path.getTotalLength();
 
-      // PERFORMANCE SAFE INITIAL STATE
       gsap.set(path, {
         strokeDasharray: pathLength,
         strokeDashoffset: pathLength,
-        willChange: "stroke-dashoffset",
       });
 
       gsap.set(glowBall, {
         xPercent: -50,
         yPercent: -50,
-        willChange: "transform",
-        force3D: true,
       });
 
-      // SINGLE TIMELINE
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top 22%",
           end: "bottom bottom",
           scrub: 1.2,
-          invalidateOnRefresh: true,
         },
       });
 
-      // PATH DRAW
       tl.to(
         path,
         {
@@ -139,7 +130,6 @@ export function Services() {
         0
       );
 
-      // BALL PERFECTLY SYNCED
       tl.to(
         glowBall,
         {
@@ -157,7 +147,6 @@ export function Services() {
     }, section);
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
       ctx.revert();
     };
   }, []);
@@ -172,13 +161,9 @@ export function Services() {
       <section
         id="services"
         ref={sectionRef}
-        className="
-        relative
-        overflow-hidden
-        py-24 md:py-36
-        "
+        className="relative overflow-hidden py-24 md:py-36"
       >
-        {/* LIGHT BACKGROUND */}
+        {/* BACKGROUND */}
         <div
           className="
           absolute inset-0
@@ -186,7 +171,7 @@ export function Services() {
           "
         />
 
-        {/* OPTIMIZED GLOW */}
+        {/* TOP GLOW */}
         <div
           className="
           absolute
@@ -302,7 +287,6 @@ export function Services() {
               h-6
 
               rounded-full
-
               bg-violet-500
 
               shadow-[0_0_20px_#8b5cf6]
@@ -314,10 +298,13 @@ export function Services() {
 
             {/* SERVICES */}
             <div className="relative z-10 flex flex-col gap-20 lg:gap-44">
-              {services.map((s, i) => (
-                <div
-                  key={s.title}
-                  className={`
+              {services.map((service, i) => {
+                const Icon = service.icon;
+
+                return (
+                  <div
+                    key={service.title}
+                    className={`
                     service-card
                     flex
                     justify-center
@@ -327,133 +314,134 @@ export function Services() {
                         ? "lg:justify-start"
                         : "lg:justify-end"
                     }
-                  `}
-                >
-                  <div
-                    className="
-                    relative
-                    overflow-hidden
-
-                    w-full
-                    max-w-[500px]
-
-                    rounded-[28px]
-
-                    border border-white/10
-
-                    bg-white/[0.03]
-
-                    backdrop-blur-md
-
-                    p-6 sm:p-8 md:p-9
-
-                    transition-all
-                    duration-300
-
-                    hover:-translate-y-1
-                    hover:border-violet-500/30
-
-                    group
-                    "
+                    `}
                   >
-                    {/* SMALL GLOW */}
                     <div
                       className="
-                      absolute
-                      -top-16
-                      -right-16
+                      relative
+                      overflow-hidden
 
-                      w-40
-                      h-40
+                      w-full
+                      max-w-[500px]
 
-                      rounded-full
+                      rounded-[28px]
 
-                      bg-violet-500/10
+                      border border-white/10
 
-                      blur-3xl
+                      bg-white/[0.03]
 
-                      opacity-0
-                      group-hover:opacity-100
+                      backdrop-blur-md
 
-                      transition-opacity
+                      p-6 sm:p-8 md:p-9
+
+                      transition-all
                       duration-300
-                      "
-                    />
 
-                    {/* TOP */}
-                    <div className="relative z-10 flex items-center justify-between mb-6">
+                      hover:-translate-y-1
+                      hover:border-violet-500/30
+
+                      group
+                      "
+                    >
+                      {/* SMALL GLOW */}
                       <div
                         className="
-                        p-4
-                        rounded-2xl
+                        absolute
+                        -top-16
+                        -right-16
 
-                        bg-gradient-to-br
-                        from-cyan-400/15
-                        to-violet-500/15
+                        w-40
+                        h-40
 
-                        text-cyan-300
+                        rounded-full
+
+                        bg-violet-500/10
+
+                        blur-3xl
+
+                        opacity-0
+                        group-hover:opacity-100
+
+                        transition-opacity
+                        duration-300
                         "
-                      >
-                        <s.icon size={26} />
-                      </div>
+                      />
 
-                      <span className="text-white/40 font-mono text-sm">
-                        {s.num}
-                      </span>
-                    </div>
-
-                    {/* TITLE */}
-                    <h3
-                      className="
-                      text-2xl
-                      md:text-3xl
-
-                      font-bold
-
-                      mb-4
-                      "
-                    >
-                      {s.title}
-                    </h3>
-
-                    {/* DESC */}
-                    <p
-                      className="
-                      text-sm
-                      md:text-base
-
-                      text-muted-foreground
-                      leading-relaxed
-
-                      mb-7
-                      "
-                    >
-                      {s.desc}
-                    </p>
-
-                    {/* SKILLS */}
-                    <div className="flex flex-wrap gap-2">
-                      {s.skills.map((sk) => (
-                        <span
-                          key={sk}
+                      {/* TOP */}
+                      <div className="relative z-10 flex items-center justify-between mb-6">
+                        <div
                           className="
-                          px-3 py-1
+                          p-4
+                          rounded-2xl
 
-                          rounded-full
+                          bg-gradient-to-br
+                          from-cyan-400/15
+                          to-violet-500/15
 
-                          bg-white/8
-
-                          text-xs
-                          md:text-sm
+                          text-cyan-300
                           "
                         >
-                          {sk}
+                          <Icon size={26} />
+                        </div>
+
+                        <span className="text-white/40 font-mono text-sm">
+                          {service.num}
                         </span>
-                      ))}
+                      </div>
+
+                      {/* TITLE */}
+                      <h3
+                        className="
+                        text-2xl
+                        md:text-3xl
+
+                        font-bold
+
+                        mb-4
+                        "
+                      >
+                        {service.title}
+                      </h3>
+
+                      {/* DESC */}
+                      <p
+                        className="
+                        text-sm
+                        md:text-base
+
+                        text-muted-foreground
+                        leading-relaxed
+
+                        mb-7
+                        "
+                      >
+                        {service.desc}
+                      </p>
+
+                      {/* SKILLS */}
+                      <div className="flex flex-wrap gap-2">
+                        {service.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="
+                            px-3 py-1
+
+                            rounded-full
+
+                            bg-white/8
+
+                            text-xs
+                            md:text-sm
+                            "
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* MOBILE LINE */}
