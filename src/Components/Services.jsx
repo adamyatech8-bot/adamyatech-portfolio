@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import  { gsap } from "gsap";
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
@@ -24,7 +24,6 @@ const services = [
     desc: "Modern websites built with React, Next.js and TypeScript.",
     skills: ["React", "Next.js", "TypeScript"],
   },
-
   {
     icon: Smartphone,
     num: "02",
@@ -32,7 +31,6 @@ const services = [
     desc: "Cross-platform mobile apps with smooth native feel.",
     skills: ["React Native", "Expo", "Android"],
   },
-
   {
     icon: Palette,
     num: "03",
@@ -40,7 +38,6 @@ const services = [
     desc: "Beautiful interfaces focused on user experience.",
     skills: ["Figma", "Framer", "Motion"],
   },
-
   {
     icon: Zap,
     num: "04",
@@ -48,7 +45,6 @@ const services = [
     desc: "Ultra-fast optimized websites with strong SEO.",
     skills: ["SEO", "Lighthouse", "Speed"],
   },
-
   {
     icon: Rocket,
     num: "05",
@@ -56,7 +52,6 @@ const services = [
     desc: "Production-ready cloud deployment & scaling.",
     skills: ["Vercel", "CI/CD", "Cloud"],
   },
-
   {
     icon: ShieldCheck,
     num: "06",
@@ -71,20 +66,19 @@ export function Services() {
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
-    const isDesktop = window.innerWidth >= 1024;
+    // Mobile screens ko chhod kar (Tablet aur Desktop par chalega)
+    const isNotMobile = window.innerWidth >= 768;
 
     const ctx = gsap.context(() => {
-      // CARD REVEAL
+      // CARD REVEAL ANIMATION
       gsap.from(".service-card", {
         opacity: 0,
         y: 60,
         duration: 0.8,
         stagger: 0.12,
         ease: "power2.out",
-
         scrollTrigger: {
           trigger: section,
           start: "top 78%",
@@ -92,8 +86,7 @@ export function Services() {
         },
       });
 
-      // DESKTOP PATH ANIMATION
-      if (!isDesktop) return;
+      if (!isNotMobile) return;
 
       const path = document.querySelector("#journeyPath");
       const glowBall = document.querySelector("#glowBall");
@@ -102,6 +95,7 @@ export function Services() {
 
       const pathLength = path.getTotalLength();
 
+      // INITIAL STATES
       gsap.set(path, {
         strokeDasharray: pathLength,
         strokeDashoffset: pathLength,
@@ -110,45 +104,40 @@ export function Services() {
       gsap.set(glowBall, {
         xPercent: -50,
         yPercent: -50,
+        transformOrigin: "center center",
       });
 
+      // TIMELINE FOR PERFECT SYNC
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 22%",
-          end: "bottom bottom",
-          scrub: 1.2,
+          start: "top 30%", // Jab section top se thoda niche ho tabhi start ho jae
+          end: "bottom 85%", // Pure section ke scroll hone tak chale
+          scrub: 1, // Smooth scrolling control ke liye
+          invalidateOnRefresh: true, // Resize hone par recalculate karega
         },
       });
 
-      tl.to(
-        path,
-        {
-          strokeDashoffset: 0,
-          ease: "none",
+      // Dono animations ek hi time [position 0] pr start hongi aur sath chalengi
+      tl.to(path, {
+        strokeDashoffset: 0,
+        ease: "none",
+      }, 0)
+      .to(glowBall, {
+        motionPath: {
+          path: path,
+          align: path,
+          alignOrigin: [0.5, 0.5],
+          autoRotate: false,
+          start: 0,
+          end: 1,
         },
-        0
-      );
+        ease: "none",
+      }, 0);
 
-      tl.to(
-        glowBall,
-        {
-          motionPath: {
-            path: path,
-            align: path,
-            alignOrigin: [0.5, 0.5],
-            autoRotate: false,
-          },
-
-          ease: "none",
-        },
-        0
-      );
     }, section);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -164,30 +153,10 @@ export function Services() {
         className="relative overflow-hidden py-24 md:py-36"
       >
         {/* BACKGROUND */}
-        <div
-          className="
-          absolute inset-0
-          bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.08),transparent_55%)]
-          "
-        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.08),transparent_55%)]" />
 
         {/* TOP GLOW */}
-        <div
-          className="
-          absolute
-          top-0
-          left-1/2
-          -translate-x-1/2
-
-          w-[420px]
-          h-[420px]
-
-          bg-cyan-500/10
-          blur-[90px]
-
-          pointer-events-none
-          "
-        />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[420px] h-[420px] bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-5 md:px-10">
           {/* HEADING */}
@@ -196,29 +165,11 @@ export function Services() {
               // services
             </p>
 
-            <h2
-              className="
-              text-4xl
-              sm:text-5xl
-              md:text-7xl
-
-              font-bold
-              leading-tight
-              "
-            >
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight">
               Digital experiences
               <br />
-
               <span
-                className="
-                text-transparent
-                bg-clip-text
-                bg-gradient-to-r
-                from-cyan-400
-                via-violet-500
-                to-pink-500
-                italic
-                "
+                className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500 italic"
                 style={{
                   fontFamily: '"Instrument Serif", serif',
                 }}
@@ -230,21 +181,26 @@ export function Services() {
 
           {/* MAIN */}
           <div className="relative">
-            {/* SVG PATH */}
+            {/* SVG PATH (Hidden only on mobile now) */}
             <svg
               className="
-              absolute
-              left-1/2
-              top-0
-              -translate-x-1/2
-
-              h-full
-              w-[760px]
-
-              z-0
-              hidden lg:block
+                absolute
+                left-1/2
+                -translate-x-1/2
+                top-0
+                h-full
+                w-[320px]
+                sm:w-[400px]
+                md:w-[540px]
+                lg:w-[620px]
+                xl:w-[760px]
+                2xl:w-[880px]
+                z-0
+                hidden md:block
+                pointer-events-none
               "
-              viewBox="0 0 850 2800"
+              viewBox="0 0 500 2800"
+              preserveAspectRatio="xMidYMid slice"
               fill="none"
             >
               <defs>
@@ -264,14 +220,15 @@ export function Services() {
               <path
                 id="journeyPath"
                 d="
-                M425 0
-                C700 250 150 550 425 900
-                C700 1250 150 1550 425 1900
-                C700 2250 150 2500 425 2750
+                  M250 0
+                  C400 250 100 550 250 900
+                  C400 1250 100 1550 250 1900
+                  C400 2250 100 2500 250 2750
                 "
                 stroke="url(#lineGradient)"
                 strokeWidth="5"
                 strokeLinecap="round"
+                fill="none"
               />
             </svg>
 
@@ -279,20 +236,18 @@ export function Services() {
             <div
               id="glowBall"
               className="
-              absolute
-              top-0
-              left-0
-
-              w-6
-              h-6
-
-              rounded-full
-              bg-violet-500
-
-              shadow-[0_0_20px_#8b5cf6]
-
-              z-20
-              hidden lg:block
+                absolute
+                top-0
+                left-0
+                w-6
+                h-6
+                rounded-full
+                bg-violet-500
+                shadow-[0_0_25px_#8b5cf6]
+                z-20
+                hidden
+                md:block
+                will-change-transform
               "
             />
 
@@ -304,83 +259,54 @@ export function Services() {
                 return (
                   <div
                     key={service.title}
-                    className={`
-                    service-card
-                    flex
-                    justify-center
-
-                    ${
+                    className={`service-card flex justify-center ${
                       i % 2 === 0
-                        ? "lg:justify-start"
-                        : "lg:justify-end"
-                    }
-                    `}
+                        ? "md:justify-start"
+                        : "md:justify-end"
+                    }`}
                   >
                     <div
                       className="
-                      relative
-                      overflow-hidden
-
-                      w-full
-                      max-w-[500px]
-
-                      rounded-[28px]
-
-                      border border-white/10
-
-                      bg-white/[0.03]
-
-                      backdrop-blur-md
-
-                      p-6 sm:p-8 md:p-9
-
-                      transition-all
-                      duration-300
-
-                      hover:-translate-y-1
-                      hover:border-violet-500/30
-
-                      group
+                        relative
+                        overflow-hidden
+                        w-full
+                        max-w-[500px]
+                        rounded-[28px]
+                        border
+                        border-white/10
+                        bg-white/[0.03]
+                        backdrop-blur-md
+                        p-6
+                        sm:p-8
+                        md:p-9
+                        transition-all
+                        duration-300
+                        hover:-translate-y-1
+                        hover:border-violet-500/30
+                        group
                       "
                     >
-                      {/* SMALL GLOW */}
+                      {/* CARD GLOW */}
                       <div
                         className="
-                        absolute
-                        -top-16
-                        -right-16
-
-                        w-40
-                        h-40
-
-                        rounded-full
-
-                        bg-violet-500/10
-
-                        blur-3xl
-
-                        opacity-0
-                        group-hover:opacity-100
-
-                        transition-opacity
-                        duration-300
+                          absolute
+                          -top-16
+                          -right-16
+                          w-40
+                          h-40
+                          rounded-full
+                          bg-violet-500/10
+                          blur-3xl
+                          opacity-0
+                          group-hover:opacity-100
+                          transition-opacity
+                          duration-300
                         "
                       />
 
                       {/* TOP */}
                       <div className="relative z-10 flex items-center justify-between mb-6">
-                        <div
-                          className="
-                          p-4
-                          rounded-2xl
-
-                          bg-gradient-to-br
-                          from-cyan-400/15
-                          to-violet-500/15
-
-                          text-cyan-300
-                          "
-                        >
+                        <div className="p-4 rounded-2xl bg-gradient-to-br from-cyan-400/15 to-violet-500/15 text-cyan-300">
                           <Icon size={26} />
                         </div>
 
@@ -390,29 +316,18 @@ export function Services() {
                       </div>
 
                       {/* TITLE */}
-                      <h3
-                        className="
-                        text-2xl
-                        md:text-3xl
-
-                        font-bold
-
-                        mb-4
-                        "
-                      >
+                      <h3 className="text-2xl md:text-3xl font-bold mb-4">
                         {service.title}
                       </h3>
 
                       {/* DESC */}
                       <p
                         className="
-                        text-sm
-                        md:text-base
-
-                        text-muted-foreground
-                        leading-relaxed
-
-                        mb-7
+                          text-sm
+                          md:text-base
+                          text-muted-foreground
+                          leading-relaxed
+                          mb-7
                         "
                       >
                         {service.desc}
@@ -424,14 +339,12 @@ export function Services() {
                           <span
                             key={skill}
                             className="
-                            px-3 py-1
-
-                            rounded-full
-
-                            bg-white/8
-
-                            text-xs
-                            md:text-sm
+                              px-3
+                              py-1
+                              rounded-full
+                              bg-white/5
+                              text-xs
+                              md:text-sm
                             "
                           >
                             {skill}
@@ -447,22 +360,18 @@ export function Services() {
             {/* MOBILE LINE */}
             <div
               className="
-              absolute
-              left-1/2
-              top-0
-              -translate-x-1/2
-
-              w-[2px]
-              h-full
-
-              bg-gradient-to-b
-              from-cyan-400
-              via-violet-500
-              to-pink-500
-
-              opacity-15
-
-              lg:hidden
+                absolute
+                left-1/2
+                top-0
+                -translate-x-1/2
+                w-[2px]
+                h-full
+                bg-gradient-to-b
+                from-cyan-400
+                via-violet-500
+                to-pink-500
+                opacity-15
+                md:hidden
               "
             />
           </div>

@@ -37,7 +37,7 @@ export function About() {
      Typing Animation
   ========================== */
 
-  const words = ["Developer.", "Designer.", "Problem Solver."];
+  const words = ["Developer.", "Designer.", "Innovator."];
 
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
