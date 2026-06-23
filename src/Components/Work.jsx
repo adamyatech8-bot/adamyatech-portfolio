@@ -9,6 +9,7 @@ import {
   Smartphone,
   Palette,
   ShoppingCart,
+  Leaf,
 } from "lucide-react";
 
 import TempSeo from "./TempSeo";
@@ -25,17 +26,20 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Tailwind"],
     accent: "from-cyan-500/20 to-blue-500/5",
     demo: "#",
+    status: "coming",
   },
 
   {
     number: "02",
-    icon: Smartphone,
-    name: "Rental Room Platform",
-    type: "MOBILE APP • 2026",
-    desc: "Smart booking experience for rooms, stays and property management.",
-    tags: ["React Native", "Expo", "Supabase"],
-    accent: "from-violet-500/20 to-fuchsia-500/5",
-    demo: "#",
+    icon: Leaf,
+    name: "Plant Doctor",
+    type: "WEB APP • 2026",
+    desc: "AI-powered plant disease detection platform that analyzes plant images and provides disease identification, confidence score, treatment recommendations, and prevention tips for healthier crops.",
+    tags: ["React", "Node.js", "Express", "MongoDB", "Gemini AI"],
+    accent: "from-green-500/20 to-emerald-500/5",
+    demo: "https://plant-doctor-coral.vercel.app/",
+    status: "live",
+    image: "/plant-doctor.png",
   },
 
   {
@@ -47,6 +51,7 @@ const projects = [
     tags: ["Astro", "GSAP", "Framer Motion"],
     accent: "from-sky-500/20 to-cyan-500/5",
     demo: "#",
+    status: "coming",
   },
 
   {
@@ -58,6 +63,7 @@ const projects = [
     tags: ["Shopify", "Hydrogen", "Edge"],
     accent: "from-pink-500/20 to-violet-500/5",
     demo: "#",
+    status: "coming",
   },
 ];
 
@@ -236,11 +242,10 @@ export function Work() {
                     flex
                     justify-center
 
-                    ${
-                      i % 2 === 0
+                    ${i % 2 === 0
                         ? "lg:justify-start"
                         : "lg:justify-end"
-                    }
+                      }
                     `}
                   >
                     {/* FLOATING NODE */}
@@ -350,31 +355,34 @@ export function Work() {
                         </div>
 
                         {/* ICON */}
-                        <div
-                          className="
-                          absolute
-                          bottom-5
-                          left-5
-
-                          w-14
-                          h-14
-
-                          rounded-2xl
-
-                          border border-white/10
-
-                          bg-white/5
-
-                          backdrop-blur-sm
-
-                          flex items-center justify-center
-                          "
-                        >
-                          <Icon
-                            size={28}
-                            className="text-cyan-300"
+                        {/* IMAGE OR ICON */}
+                        {project.image ? (
+                          <img
+                            src={project.image}
+                            alt={project.name}
+                            className="absolute inset-0 w-full h-full object-cover"
                           />
-                        </div>
+                        ) : (
+                          <div
+                            className="
+    absolute
+    bottom-5
+    left-5
+    w-14
+    h-14
+    rounded-2xl
+    border border-white/10
+    bg-white/5
+    backdrop-blur-sm
+    flex items-center justify-center
+    "
+                          >
+                            <Icon
+                              size={28}
+                              className="text-cyan-300"
+                            />
+                          </div>
+                        )}
 
                         {/* TYPE */}
                         <div className="absolute top-5 right-5">
@@ -401,26 +409,41 @@ export function Work() {
                       <div className="p-6 md:p-8">
                         {/* COMING SOON */}
                         <div className="mb-5">
-                          <span
-                            className="
-                            inline-flex
-                            items-center
-                            gap-2
-
-                            text-xs
-
-                            px-3 py-1.5
-                            rounded-full
-
-                            bg-cyan-400
-                            text-black
-                            "
-                          >
-                            <Rocket size={12} />
-                            Coming Soon
-                          </span>
+                          {project.status === "coming" ? (
+                            <span
+                              className="
+      inline-flex
+      items-center
+      gap-2
+      text-xs
+      px-3 py-1.5
+      rounded-full
+      bg-cyan-400
+      text-black
+      "
+                            >
+                              <Rocket size={12} />
+                              Coming Soon
+                            </span>
+                          ) : (
+                            <span
+                              className="
+      inline-flex
+      items-center
+      gap-2
+      text-xs
+      px-3 py-1.5
+      rounded-full
+      bg-green-500
+      text-white
+      shadow-lg
+      shadow-green-500/30
+      "
+                            >
+                              🟢 Live Now
+                            </span>
+                          )}
                         </div>
-
                         {/* TITLE */}
                         <h3
                           className="
@@ -488,7 +511,7 @@ export function Work() {
                           duration-300
                           "
                         >
-                          View Project
+                          Live demo
 
                           <ArrowUpRight size={18} />
                         </a>
